@@ -51,6 +51,7 @@ app.get('/dados', (req, res) => {
 
 // Rota POST para adicionar dados
 app.post('/dados', (req, res) => {
+  console.log('Corpo da solicitação:', req.body); 
   const novoDado = {
     nome: req.body.nome,
     email: req.body.email
