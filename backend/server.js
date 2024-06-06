@@ -65,11 +65,11 @@ app.post('/dados', (req, res) => {
   const query = 'INSERT INTO usuarios SET ?';
   db.query(query, novoDado, (err, result) => {
     if (err) {
-      console.error('Erro ao adicionar dado:', err);
-      res.status(500).send('Erro ao adicionar dado');
+      console.error('Erro ao adicionar os dado:', err);
+      res.status(500).send('Erro ao adicionar os dado');
       return;
     }
-    res.send('Dado adicionado com sucesso!');
+    res.send('Dados adicionado com sucesso!');
   });
 });
 
