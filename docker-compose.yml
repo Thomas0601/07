@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      DB_HOST: 127.0.0.1
+      DB_USER: root
+      DB_PASSWORD: sua_senha
+      DB_NAME: seu_banco_de_dados
+      PORT: 3000
+    networks:
+      - mynetwork
+
+  frontend:  # Renomeando o serviço para "frontend"
+    image: nginx:latest
+    volumes:
+      - ./public:/usr/share/nginx/html
+    ports:
+      - "8080:80"
+    networks:
+      - mynetwork
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: teste
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  db_data:
